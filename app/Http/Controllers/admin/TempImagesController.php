@@ -28,5 +28,10 @@ class TempImagesController extends Controller
                 'message' => 'Image uploaded successfully.'
             ]);
         }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Image not uploaded.'
+        ]);
     }
 }
