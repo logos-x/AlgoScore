@@ -40,6 +40,24 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label for="status">Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option {{ ($category->status == 1) ? 'selected' : '' }} value="1">Action</option>
+                                        <option {{ ($category->status == 0) ? 'selected' : '' }} value="0">Block</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="show">Show on Home</label>
+                                    <select name="show" id="show" class="form-control">
+                                        <option {{ ($category->show == 'Yes') ? 'selected' : '' }} value="Yes">Yes</option>
+                                        <option {{ ($category->show == 'No') ? 'selected' : '' }} value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
                                     <input type="hidden" id="image_id" name="image_id" value="">
                                     <label for="image">Image</label>
                                     <div id="image" class="dropzone dz-clickable">
@@ -53,15 +71,6 @@
                                         <img src="{{ asset('uploads/category/thumb/'.$category->image) }}" alt="" width="100">
                                     </div>
                                 @endif
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option {{ ($category->status == 1) ? 'selected' : '' }} value="1">Action</option>
-                                        <option {{ ($category->status == 0) ? 'selected' : '' }} value="0">Block</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
                     </div>

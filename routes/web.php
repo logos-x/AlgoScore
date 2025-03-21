@@ -11,11 +11,14 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\admin\ProductImageController;
+use App\Http\Controllers\FrontController;
 use \Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/', [FrontController::class, 'index'])->name('front.home');
 
 Route::middleware(['web'])->group(function () {
     Route::group(['prefix' => 'admin'], function () {
