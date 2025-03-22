@@ -45,6 +45,7 @@ class ProductController extends Controller
             'category' => 'required|numeric',
             'song' => 'required|numeric',
             'is_featured' => 'required|in:1,0',
+            'level' => 'nullable|in:Beginner,Intermediate,Advanced',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -57,6 +58,7 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->compare_price = $request->compare_price;
             $product->status = $request->status;
+            $product->level = $request->level;
             $product->category_id = $request->category;
             $product->sub_category_id = $request->sub_category;
             $product->song_id = $request->song;
@@ -146,6 +148,7 @@ class ProductController extends Controller
             'category' => 'required|numeric',
             'song' => 'required|numeric',
             'is_featured' => 'required|in:1,0',
+            'level' => 'nullable|in:Beginner,Intermediate,Advanced',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -157,6 +160,7 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->compare_price = $request->compare_price;
             $product->status = $request->status;
+            $product->level = $request->level;
             $product->category_id = $request->category;
             $product->sub_category_id = $request->sub_category;
             $product->song_id = $request->song;

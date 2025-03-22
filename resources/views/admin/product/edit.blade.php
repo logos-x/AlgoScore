@@ -173,6 +173,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="h4 mb-3">Difficulty level</h2>
+                                <div class="mb-3">
+                                    <select name="level" id="level" class="form-control">
+                                        <option {{ is_null($product->level) ? 'selected' : '' }} value=""></option>
+                                        <option {{ ($product->level == 'Beginner') ? 'selected' : '' }} value="Beginner">Beginner</option>
+                                        <option {{ ($product->level == 'Intermediate') ? 'selected' : '' }} value="Intermediate">Intermediate</option>
+                                        <option {{ ($product->level == 'Advanced') ? 'selected' : '' }} value="Advanced">Advanced</option>
+                                    </select>
+                                    <p class="error"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
