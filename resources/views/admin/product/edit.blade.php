@@ -43,8 +43,8 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label for="short-description">Short description</label>
-                                            <textarea name="short-description" id="short-description" cols="30" rows="10" class="summernote" placeholder="Short description">{{
+                                            <label for="short_description">Short description</label>
+                                            <textarea name="short_description" id="short_description" cols="30" rows="10" class="summernote" placeholder="Short description">{{
                                                 $product->short_description }}
                                             </textarea>
                                         </div>

@@ -63,7 +63,7 @@ class ProductController extends Controller
             $product->sub_category_id = $request->sub_category;
             $product->song_id = $request->song;
             $product->is_featured = $request->is_featured;
-            $product->short_descriptions = $request->short_description;
+            $product->short_description = $request->short_description;
             $product->save();
 
             // Save Gallery Pictures
@@ -166,7 +166,7 @@ class ProductController extends Controller
             $product->sub_category_id = $request->sub_category;
             $product->song_id = $request->song;
             $product->is_featured = $request->is_featured;
-            $product->short_descriptions = $request->short_description;
+            $product->short_description = $request->short_description;
             $product->save();
 
             // Save Gallery Pictures

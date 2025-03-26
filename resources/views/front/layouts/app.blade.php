@@ -33,6 +33,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick-theme.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/ion.rangeSlider.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/style.css') }}" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -95,7 +96,7 @@
                                 @if($category->sub_category->isNotEmpty())
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         @foreach($category->sub_category as $subCategory)
-                                            <li><a class="dropdown-item nav-link" href="#">{{ $subCategory->name }}</a></li>
+                                            <li><a class="dropdown-item nav-link" href="{{ route('front.shop', [$category->slug, $subCategory->slug]) }}">{{ $subCategory->name }}</a></li>
                                         @endforeach
 
                                     </ul>
@@ -227,8 +228,10 @@
 <script src="{{ asset('front-assets/js/bootstrap.bundle.5.1.3.min.js') }}"></script>
 <script src="{{ asset('front-assets/js/instantpages.5.1.0.min.js') }}"></script>
 <script src="{{ asset('front-assets/js/lazyload.17.6.0.min.js') }}"></script>
+<script src="{{ asset('front-assets/js/ion.rangeSlider.min.js') }}"></script>
 <script src="{{ asset('front-assets/js/slick.min.js') }}"></script>
 <script src="{{ asset('front-assets/js/custom.js') }}"></script>
+
 <script>
     window.onscroll = function() {myFunction()};
 
@@ -243,5 +246,7 @@
         }
     }
 </script>
+
+@yield('customJS')
 </body>
 </html>
