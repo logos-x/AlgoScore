@@ -43,6 +43,14 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
+                                            <label for="short-description">Short description</label>
+                                            <textarea name="short-description" id="short-description" cols="30" rows="10" class="summernote" placeholder="Short description">{{
+                                                $product->short_description }}
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
                                             <label for="description">Description</label>
                                             <textarea name="description" id="description" cols="30" rows="10" class="summernote" placeholder="Description">{{
                                                 $product->description }}
@@ -191,7 +199,7 @@
                 </div>
 
                 <div class="pb-5 pt-3">
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{ route('products.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
                 </div>
             </div>

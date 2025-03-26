@@ -158,9 +158,9 @@
             })
         });
 
-        $("#title, #singer").change(function () {
+        $("#title, #composer").change(function () {
             let title = $("#title").val();
-            let singer = $("#singer").val();
+            let singer = $("#composer").val();
 
             $("button[type=submit]").prop('disabled', true);
 
