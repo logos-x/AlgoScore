@@ -64,6 +64,8 @@ class ProductController extends Controller
             $product->song_id = $request->song;
             $product->is_featured = $request->is_featured;
             $product->short_description = $request->short_description;
+            $product->related_products = (!empty($request->related_products)) ? implode(',', $request->related_products) : 'null';
+
             $product->save();
 
             // Save Gallery Pictures
@@ -128,6 +130,13 @@ class ProductController extends Controller
 
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
 
+        $relatedProducts = [];
+        if ($product->related_products != '') {
+            $productArray = explode(',', $product->related_products);
+
+            $relatedProducts = Product::whereIn('id', $productArray)->get();
+        }
+
         $data = [];
         $data['product'] = $product;
         $categories = Category::orderBy('name', 'asc')->get();
@@ -136,6 +145,8 @@ class ProductController extends Controller
         $data['subCategories'] = $subCategories;
         $data['productImages'] = $productImages;
         $data['songs'] = $songs;
+        $data['relatedProducts'] = $relatedProducts;
+
         return view('admin.product.edit', $data);
     }
 
@@ -167,6 +178,7 @@ class ProductController extends Controller
             $product->song_id = $request->song;
             $product->is_featured = $request->is_featured;
             $product->short_description = $request->short_description;
+            $product->related_products = (!empty($request->related_products)) ? implode(',', $request->related_products) : 'null';
             $product->save();
 
             // Save Gallery Pictures
@@ -217,6 +229,25 @@ class ProductController extends Controller
         return response()->json([
            'status' => true,
            'message' => 'Product deleted successfully'
+        ]);
+    }
+
+    public function getProducts(Request $request) {
+
+        $tempProduct = [];
+        if ($request->term != "") {
+            $products = Product::where('name', 'like', '%'.$request->term.'%')->get();
+
+            if ($products != null) {
+                foreach ($products as $product) {
+                    $tempProduct[] = array('id' => $product->id, 'text' => $product->name);
+                }
+            }
+        }
+
+        return response()->json([
+            'tags' => $tempProduct,
+            'status' => true
         ]);
     }
 }

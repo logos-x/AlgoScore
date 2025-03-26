@@ -23,6 +23,7 @@ Route::get('/', [FrontController::class, 'index'])->name('front.home');
 Route::get('/shop/{categorySlug?}/{subCategorySlug?}', [ShopController::class, 'index'])->name('front.shop');
 Route::get('/product/{slug}', [ShopController::class, 'product'])->name('front.product');
 
+
 Route::middleware(['web'])->group(function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::group(['middleware' => 'admin.guest'], function () {
@@ -67,6 +68,7 @@ Route::middleware(['web'])->group(function () {
             Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
             Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
             Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.delete');
+            Route::get('/get-products', [ProductController::class, 'getProducts'])->name('products.getProducts');
 
             // Product Sub-Category Route
             Route::get('/product-subcategories', [ProductSubCategoryController::class, 'index'])->name('product-subcategories.index');
