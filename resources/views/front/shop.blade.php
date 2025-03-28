@@ -53,84 +53,6 @@
                                         </div>
                                     @endforeach
                                 @endif
-{{--                                <div class="accordion-item">--}}
-{{--                                    <h2 class="accordion-header" id="headingOne">--}}
-{{--                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">--}}
-{{--                                            Electronics--}}
-{{--                                        </button>--}}
-{{--                                    </h2>--}}
-{{--                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">--}}
-{{--                                        <div class="accordion-body">--}}
-{{--                                            <div class="navbar-nav">--}}
-{{--                                                <a href="" class="nav-item nav-link">Mobile</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Tablets</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Laptops</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Speakers</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Watches</a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="accordion-item">--}}
-{{--                                    <h2 class="accordion-header" id="headingOne">--}}
-{{--                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">--}}
-{{--                                            Men's Fashion--}}
-{{--                                        </button>--}}
-{{--                                    </h2>--}}
-{{--                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">--}}
-{{--                                        <div class="accordion-body">--}}
-{{--                                            <div class="navbar-nav">--}}
-{{--                                                <a href="" class="nav-item nav-link">Shirts</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Jeans</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Shoes</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Watches</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Perfumes</a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="accordion-item">--}}
-{{--                                    <h2 class="accordion-header" id="headingOne">--}}
-{{--                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">--}}
-{{--                                            Women's Fashion--}}
-{{--                                        </button>--}}
-{{--                                    </h2>--}}
-{{--                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">--}}
-{{--                                        <div class="accordion-body">--}}
-{{--                                            <div class="navbar-nav">--}}
-{{--                                                <a href="" class="nav-item nav-link">T-Shirts</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Tops</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Jeans</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Shoes</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Watches</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Perfumes</a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="accordion-item">--}}
-{{--                                    <h2 class="accordion-header" id="headingOne">--}}
-{{--                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">--}}
-{{--                                            Applicances--}}
-{{--                                        </button>--}}
-{{--                                    </h2>--}}
-{{--                                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">--}}
-{{--                                        <div class="accordion-body">--}}
-{{--                                            <div class="navbar-nav">--}}
-{{--                                                <a href="" class="nav-item nav-link">TV</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Washing Machines</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Air Conditioners</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Vacuum Cleaner</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Fans</a>--}}
-{{--                                                <a href="" class="nav-item nav-link">Air Coolers</a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
                             </div>
                         </div>
                     </div>
@@ -196,13 +118,13 @@
                                             <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                             <div class="product-action">
-                                                <a class="btn btn-dark" href="#">
+                                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }})">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="card-body text-center mt-3">
-                                            <a class="h6 link" href="product.php">{{ $product->name }}</a>
+                                            <a class="h6 link" href="{{ route('front.product', $product->slug) }}">{{ $product->name }}</a>
                                             <div class="price mt-2">
                                                 <span class="h5"><strong>{{ number_format($product->price, 0, ',', '.') }} ₫</strong></span>
                                                 @if($product->compare_price > 0)

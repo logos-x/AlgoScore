@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick-theme.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/ion.rangeSlider.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/custom.css') }}" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +44,8 @@
 
     <!-- Fav Icon -->
     <link rel="shortcut icon" type="image/x-icon" href="#" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body data-instant-intensity="mousedown">
 
@@ -51,8 +54,8 @@
         <div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
             <div class="col-lg-4 logo">
                 <a href="{{ route('front.home') }}" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Online</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SHOP</span>
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">ALGO</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SCORE</span>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
@@ -83,10 +86,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
-                    </li> -->
-
                     @if(getCategories()->isNotEmpty())
                         @foreach(getCategories() as $category)
                             <li class="nav-item dropdown">
@@ -104,64 +103,10 @@
                             </li>
                         @endforeach
                     @endif
-
-                    {{--                    <li class="nav-item dropdown">--}}
-                    {{--                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                    {{--                            Electronics--}}
-                    {{--                        </button>--}}
-                    {{--                        <ul class="dropdown-menu dropdown-menu-dark">--}}
-                    {{--                            <li><a class="dropdown-item nav-link" href="#">Mobile</a></li>--}}
-                    {{--                            <li><a class="dropdown-item nav-link" href="#">Tablets</a></li>--}}
-                    {{--                            <li><a class="dropdown-item nav-link" href="#">Laptops</a></li>--}}
-                    {{--                            <li><a class="dropdown-item nav-link" href="#">Speakers</a></li>--}}
-                    {{--                            <li><a class="dropdown-item nav-link" href="#">Watches</a></li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </li>--}}
-                    {{--                    <li class="nav-item dropdown">--}}
-                    {{--                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                    {{--                            Men's Fashion--}}
-                    {{--                        </button>--}}
-                    {{--                        <ul class="dropdown-menu dropdown-menu-dark">--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Shirts</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Jeans</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Shoes</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Watches</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Perfumes</a></li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </li>--}}
-                    {{--                    <li class="nav-item dropdown">--}}
-                    {{--                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                    {{--                            Women's Fashion--}}
-                    {{--                        </button>--}}
-                    {{--                        <ul class="dropdown-menu dropdown-menu-dark">--}}
-                    {{--                            <li><a class="dropdown-item" href="#">T-Shirts</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Tops</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Jeans</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Shoes</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Watches</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Perfumes</a></li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </li>--}}
-
-                    {{--                    <li class="nav-item dropdown">--}}
-                    {{--                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--}}
-                    {{--                            Appliances--}}
-                    {{--                        </button>--}}
-                    {{--                        <ul class="dropdown-menu dropdown-menu-dark">--}}
-                    {{--                            <li><a class="dropdown-item" href="#">TV</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Washing Machines</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Air Conditioners</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Vacuum Cleaner</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Fans</a></li>--}}
-                    {{--                            <li><a class="dropdown-item" href="#">Air Coolers</a></li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </li>--}}
-
-
                 </ul>
             </div>
             <div class="right-nav py-0">
-                <a href="cart.php" class="ml-3 d-flex pt-2">
+                <a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
                     <i class="fas fa-shopping-cart text-primary"></i>
                 </a>
             </div>
@@ -245,6 +190,30 @@
             navbar.classList.remove("sticky");
         }
     }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function addToCart(id) {
+
+        $.ajax({
+            url: '{{ route('front.addToCart') }}',
+            type: 'post',
+            data: {id: id},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status == true) {
+                    window.location.href = "{{ route('front.cart') }}";
+                } else {
+                    alert(response.message);
+                }
+            }
+        });
+    }
+
 </script>
 
 @yield('customJS')
