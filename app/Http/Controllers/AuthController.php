@@ -14,7 +14,9 @@ class AuthController extends Controller
         return view('front.account.login');
     }
 
+
     public function authenticate(Request $request) {
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
@@ -23,6 +25,10 @@ class AuthController extends Controller
         if($validator->passes()) {
 
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
+                if (session()->has('url.intended')) {
+                    return redirect(session()->get('url.intended'));
+                }
 
                 return redirect()->route('account.profile');
             } else {
@@ -81,6 +87,7 @@ class AuthController extends Controller
 
     public function logout() {
         Auth::logout();
+
         return redirect()->route('account.login')
             ->with('success', 'You have been logged out');
     }

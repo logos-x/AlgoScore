@@ -29,8 +29,11 @@ Route::get('/product/{slug}', [ShopController::class, 'product'])->name('front.p
 Route::get('/cart', [CartController::class, 'cart'])->name('front.cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('front.addToCart');
 Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.deleteItem.cart');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('front.checkout');
+Route::post('/process-checkout', [CartController::class, 'processCheckout'])->name('front.processCheckout');
+Route::get('/thanks/{orderId}', [CartController::class, 'thankyou'])->name('front.thanks');
 
-
+// Authenticate Route
 Route::middleware(['web'])->group(function () {
     Route::group(['prefix' => 'account'], function() {
         Route::group(['middleware' => 'guest'], function() {
@@ -99,6 +102,7 @@ Route::middleware(['web'])->group(function () {
             // Product Sub-Category Route
             Route::get('/product-subcategories', [ProductSubCategoryController::class, 'index'])->name('product-subcategories.index');
 
+            // Product Image Route
             Route::post('/product-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
             Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.delete');
 
