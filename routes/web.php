@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\AdminLoginController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\admin\ProductImageController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CartController;
@@ -106,6 +108,11 @@ Route::middleware(['web'])->group(function () {
             // Product Image Route
             Route::post('/product-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
             Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.delete');
+
+            // Order Route
+            Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+            Route::get('/orders/{id}', [OrderController::class, 'detail'])->name('orders.detail');
+            Route::post('/orders/change-status/{id}', [OrderController::class, 'changeOrderStatus'])->name('orders.changeOrderStatus');
 
             Route::get('/getSlug', function (Request $request) {
                 $slug = '';

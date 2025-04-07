@@ -45,8 +45,10 @@
                                                 <td>
                                                     @if($order->status == 'pending')
                                                         <span class="badge bg-danger">Pending</span>
-                                                    @else
+                                                    @elseif($order->status == 'delivered')
                                                         <span class="badge bg-success">Delivered</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Cancelled</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ number_format($order->grand_total, 0, ',', '.') }} ₫</td>
