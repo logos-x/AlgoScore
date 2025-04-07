@@ -96,10 +96,8 @@ class CartController extends Controller
             return redirect()->route('front.cart');
         }
 
-        if (Auth::check() == false) {
-            if (!session()->has('url.intended')) {
-                session(['url.intended' => url()->current()]);
-            }
+        if (!Auth::check()) {
+            session(['redirect_after_login' => route('front.checkout')]);
 
             return redirect()->route('account.login');
         }
@@ -141,6 +139,8 @@ class CartController extends Controller
         $order->subtotal = $subTotal;
         $order->discount = $discount;
         $order->grand_total = $grandTotal;
+        $order->payment_status = 'not paid';
+        $order->status = 'pending';
 
         $order->first_name = $request->first_name;
         $order->last_name = $request->last_name;

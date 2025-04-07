@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +28,10 @@ class AuthController extends Controller
 
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-                if (session()->has('url.intended')) {
-                    return redirect(session()->get('url.intended'));
+                if (session()->has('redirect_after_login')) {
+                    $redirectUrl = session()->get('redirect_after_login');
+                    session()->forget('redirect_after_login');
+                    return redirect($redirectUrl);
                 }
 
                 return redirect()->route('account.profile');
@@ -90,5 +94,28 @@ class AuthController extends Controller
 
         return redirect()->route('account.login')
             ->with('success', 'You have been logged out');
+    }
+
+    public function myorders() {
+        $data = [];
+        $user = Auth::user();
+
+        $orders =  Order::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+
+        $data['orders'] = $orders;
+
+        return view('front.account.order', $data);
+    }
+
+    public function orderDetail($id) {
+        $data = [];
+        $user = Auth::user();
+        $order = Order::where('user_id', $user->id)->where('id', $id)->first();
+        $data['order'] = $order;
+
+        $items = OrderItem::where('order_id', $order->id)->get();
+        $data['orderItems'] = $items;
+
+        return view('front.account.order-detail', $data);
     }
 }

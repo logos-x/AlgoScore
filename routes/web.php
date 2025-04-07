@@ -46,7 +46,8 @@ Route::middleware(['web'])->group(function () {
 
         Route::group(['middleware' => 'auth'], function() {
             Route::get('/profile', [AuthController::class, 'profile'])->name('account.profile');
-
+            Route::get('/my-orders', [AuthController::class, 'myorders'])->name('account.orders');
+            Route::get('/order-detail/{orderId}', [AuthController::class, 'orderDetail'])->name('account.orderDetail');
             Route::get('/logout', [AuthController::class, 'logout'])->name('account.logout');
         });
     });
