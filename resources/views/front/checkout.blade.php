@@ -77,34 +77,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card payment-form ">
-                        <h3 class="card-title h5 mb-3">Payment Details</h3>
                         <div class="card-body p-0">
-                            <div class="mb-3">
-                                <label for="card_number" class="mb-2">Card Number</label>
-                                <input type="text" name="card_number" id="card_number" placeholder="Valid Card Number" class="form-control">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="expiry_date" class="mb-2">Expiry Date</label>
-                                    <input type="text" name="expiry_date" id="expiry_date" placeholder="MM/YYYY" class="form-control">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="expiry_date" class="mb-2">CVV Code</label>
-                                    <input type="text" name="expiry_date" id="expiry_date" placeholder="123" class="form-control">
-                                </div>
-                            </div>
                             <div class="pt-4">
-{{--                                <a href="#" class="btn-dark btn btn-block w-100">Pay Now</a>--}}
-                                <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button>
+                                <button type="submit" class="btn-dark btn btn-block w-100">Pay with MoMo</button>
                             </div>
                         </div>
-                    </div>
-
-
-                    <!-- CREDIT CARD FORM ENDS HERE -->
-
                 </div>
             </div>
             </form>
@@ -120,9 +97,15 @@
             $('button[type="submit"]').prop('disabled', true);
 
             $.ajax({
-                url: '{{ route('front.processCheckout') }}',
+                url: '{{ route('front.preparePayment') }}',
                 type: 'post',
-                data: $(this).serializeArray(),
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    first_name: $('#first_name').val(),
+                    last_name: $('#last_name').val(),
+                    email: $('#email').val(),
+                    mobile: $('#mobile').val(),
+                },
                 dataType: 'json',
                 success: function(response) {
                     var errors = response.errors;
@@ -153,10 +136,13 @@
                             $("#mobile").removeClass('is-invalid').siblings("p").removeClass('invalid-feedback').html('')
                         }
                     } else {
-                        window.location.href = '{{ url('/thanks/') }}/'+response.orderId;
+                        if (response.payUrl) {
+                            window.location.href = response.payUrl;
+                        } else {
+                            $('button[type="submit"]').prop('disabled', false);
+                            alert("Something went wrong.");
+                        }
                     }
-
-
                 }
             });
         });

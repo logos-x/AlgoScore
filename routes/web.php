@@ -34,6 +34,9 @@ Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.
 Route::get('/checkout', [CartController::class, 'checkout'])->name('front.checkout');
 Route::post('/process-checkout', [CartController::class, 'processCheckout'])->name('front.processCheckout');
 Route::get('/thanks/{orderId}', [CartController::class, 'thankyou'])->name('front.thanks');
+Route::post('/prepare-payment', [CartController::class, 'preparePayment'])->name('front.preparePayment');
+Route::get('/payment-success', [CartController::class, 'paymentSuccess'])->name('front.paymentSuccess');
+
 
 // Authenticate Route
 Route::middleware(['web'])->group(function () {
